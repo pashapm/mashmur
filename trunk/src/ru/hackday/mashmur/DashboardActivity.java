@@ -10,14 +10,12 @@ import android.widget.AdapterView.OnItemClickListener;
 import android.widget.GridView;
 
 
-public class DashboardActivity extends Activity implements OnItemClickListener{
-    /**
-     * Called when the activity is first created.
-     */
-	private HomeGridAdapter adapter;
-	private final int QR_REQUEST = 42;  
-	
-	
+public class DashboardActivity extends Activity implements OnItemClickListener {
+
+    private HomeGridAdapter adapter;
+    private final int QR_REQUEST = 42;
+
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -25,7 +23,7 @@ public class DashboardActivity extends Activity implements OnItemClickListener{
         GridView mHomeGrid = (GridView) findViewById(R.id.HomeGrid);
         adapter = new HomeGridAdapter(this);
         mHomeGrid.setAdapter(adapter);
-        mHomeGrid.setOnItemClickListener(this);  
+        mHomeGrid.setOnItemClickListener(this);
     }
 
     @Override
@@ -37,22 +35,22 @@ public class DashboardActivity extends Activity implements OnItemClickListener{
 
         startActivityForResult(intent, QR_REQUEST);
     }
-       
-	public void onActivityResult(int requestCode, int resultCode, Intent intent) {
-	    if (requestCode == QR_REQUEST) {
-	        if (resultCode == RESULT_OK) {
-	            String contents = intent.getStringExtra("SCAN_RESULT");
-	            String format = intent.getStringExtra("SCAN_RESULT_FORMAT");
-	            // Handle successful scan
-	            Log.d("########", contents);
-	            
-	            Intent i = new Intent(this, QrCallerActivity.class);
-	            i.putExtra(QrCallerActivity.QR_CONTENT, contents);
-	            startActivity(i);
-	            
-	        } else if (resultCode == RESULT_CANCELED) {
-	            // Handle cancel 
-	        }
-	    }
-	}
+
+    public void onActivityResult(int requestCode, int resultCode, Intent intent) {
+        if (requestCode == QR_REQUEST) {
+            if (resultCode == RESULT_OK) {
+                String contents = intent.getStringExtra("SCAN_RESULT");
+                String format = intent.getStringExtra("SCAN_RESULT_FORMAT");
+                // Handle successful scan
+                Log.d("########", contents);
+
+                Intent i = new Intent(this, QrCallerActivity.class);
+                i.putExtra(QrCallerActivity.QR_CONTENT, contents);
+                startActivity(i);
+
+            } else if (resultCode == RESULT_CANCELED) {
+                // Handle cancel
+            }
+        }
+    }
 }
