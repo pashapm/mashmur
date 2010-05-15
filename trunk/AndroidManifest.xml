@@ -5,14 +5,15 @@
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
 
-    <application android:icon="@drawable/icon" android:label="mashmur">
+    <application android:icon="@drawable/icon" android:label="mashmur" android:debuggable="true">
+        <uses-library android:name="com.google.android.maps"/>
         <activity android:name=".DashboardActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
-        
+
         <activity android:name=".QrCallerActivity">
         </activity>
         <activity android:name=".NearestActivity">
