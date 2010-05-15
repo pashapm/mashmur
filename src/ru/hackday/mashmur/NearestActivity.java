@@ -9,6 +9,8 @@ import com.google.android.maps.*;
 
 import java.util.List;
 
+import static ru.hackday.mashmur.PoiProvider.E6;
+
 public class NearestActivity extends MapActivity {
     LinearLayout linearLayout;
     MapView mapView;
@@ -30,24 +32,19 @@ public class NearestActivity extends MapActivity {
 
         mapOverlays = mapView.getOverlays();
         drawable = this.getResources().getDrawable(R.drawable.androidmarker);
+
         itemizedOverlay = new NearestOverlay(drawable, this);
-
-        GeoPoint point1 = new GeoPoint(19240000, -99120000);
-        OverlayItem overlayitem1 = new OverlayItem(point1, "point1 title", "point1 title snippet");
-
-        GeoPoint point2 = new GeoPoint(35410000, 139460000);
-        OverlayItem overlayitem2 = new OverlayItem(point2, "point2 title", "point2 title snippet");
-
-        GeoPoint point3 = new GeoPoint(17410000, 69460000);
-        OverlayItem overlayitem3 = new OverlayItem(point3, "point3 title", "point3 title snippet");
-
-        itemizedOverlay.addOverlay(overlayitem1);
-        itemizedOverlay.addOverlay(overlayitem2);
-        itemizedOverlay.addOverlay(overlayitem3);
         trackOverlay = new TrackOverlay();
-        trackOverlay.addGeoPoint(point1);
-        trackOverlay.addGeoPoint(point2);
-        trackOverlay.addGeoPoint(point3);
+
+        PoiProvider poiProvider = new PoiProvider();
+        List<Poi> points = poiProvider.getNearest(60 * E6, 30 * E6, 10);
+        for (Poi point : points) {
+            GeoPoint point1 = new GeoPoint(point.latitudeE6, point.longitudeE6);
+            OverlayItem overlayitem1 = new OverlayItem(point1, point.name, point.description);
+            itemizedOverlay.addOverlay(overlayitem1);
+            trackOverlay.addGeoPoint(point1);
+        }
+
         mapOverlays.add(trackOverlay);
         mapOverlays.add(itemizedOverlay);
 
