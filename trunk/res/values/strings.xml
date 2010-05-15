@@ -2,4 +2,8 @@
 <resources>
     <string name="hello">Hello World, Lop!</string>
     <string name="app_name"></string>
+    <string name="get_qr">QR-код</string>
+    <string name="nearest">Ближайшее</string>
+    <string name="fav">Избранное</string>
+    <string name="search">Поиск</string>
 </resources>
