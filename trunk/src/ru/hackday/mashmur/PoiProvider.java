@@ -17,7 +17,7 @@ public class PoiProvider {
     public PoiProvider() {
         points.add(new Poi(60 * Poi.E6, 30 * Poi.E6, "description1", "name1", "http://ya.ru/audio1"));
         points.add(new Poi(61 * Poi.E6, 35 * Poi.E6, "description2", "name3", "http://ya.ru/audio2"));
-        points.add(new Poi(62 * Poi.E6, 40 * Poi.E6, "description3", "name3", "http://ya.ru/audio3"));
+        points.add(new Poi(62 * Poi.E6, 25 * Poi.E6, "description3", "name3", "http://ya.ru/audio3"));
         points.add(new Poi(64 * Poi.E6, 50 * Poi.E6, "description4", "name4", "http://ya.ru/audio4"));
     }
 
