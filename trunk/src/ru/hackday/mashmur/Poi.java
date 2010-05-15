@@ -3,6 +3,8 @@ package ru.hackday.mashmur;
 import com.google.android.maps.GeoPoint;
 
 public class Poi {
+    public static final int E6 = 1000000;
+    
     int latitudeE6;
     int longitudeE6;
     String description;
