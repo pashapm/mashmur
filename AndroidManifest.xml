@@ -22,6 +22,7 @@
         </activity>
         <activity android:name=".SearchActivity">
         </activity>
+        <activity android:name=".PoiListActivity"/>
     </application>
 
     <uses-sdk android:minSdkVersion="3" android:targetSdkVersion="4"/>

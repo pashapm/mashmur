@@ -15,8 +15,10 @@ public class NearestActivity extends MapActivity {
 
     List<Overlay> mapOverlays;
     Drawable drawable;
-    NearestOverlay itemizedOverlay;
+    NearestOverlay itemsOverlay;
     TrackOverlay trackOverlay;
+
+    private List<Poi> points;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -29,20 +31,18 @@ public class NearestActivity extends MapActivity {
         mapOverlays = mapView.getOverlays();
         drawable = this.getResources().getDrawable(R.drawable.androidmarker);
 
-        itemizedOverlay = new NearestOverlay(drawable, this);
+        itemsOverlay = new NearestOverlay(drawable, this);
         trackOverlay = new TrackOverlay();
 
         PoiProvider poiProvider = new PoiProvider();
-        List<Poi> points = poiProvider.getNearest(60 * E6, 30 * E6, 10);
+        List<Poi> points = poiProvider.getNearest(65 * E6, 35 * E6, 10);
         for (Poi point : points) {
-            GeoPoint point1 = new GeoPoint(point.latitudeE6, point.longitudeE6);
-            OverlayItem overlayitem1 = new OverlayItem(point1, point.name, point.description);
-            itemizedOverlay.addOverlay(overlayitem1);
-            trackOverlay.addGeoPoint(point1);
+            itemsOverlay.addPoi(point);
+            trackOverlay.addGeoPoint(point.makeGeoPoint());
         }
 
         mapOverlays.add(trackOverlay);
-        mapOverlays.add(itemizedOverlay);
+        mapOverlays.add(itemsOverlay);
 
     }
 

@@ -1,10 +1,11 @@
 package ru.hackday.mashmur;
 
 import com.google.android.maps.GeoPoint;
+import com.google.android.maps.OverlayItem;
 
 public class Poi {
     public static final int E6 = 1000000;
-    
+
     int latitudeE6;
     int longitudeE6;
     String description;
@@ -64,6 +65,10 @@ public class Poi {
 
     public GeoPoint makeGeoPoint() {
         return new GeoPoint(latitudeE6, longitudeE6);
+    }
+
+    public OverlayItem makeOverlayItem() {
+        return new OverlayItem(makeGeoPoint(), name, description);
     }
 
     @Override
