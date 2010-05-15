@@ -1,6 +1,5 @@
 1) Google Maps API
 2) KML/GPX parser
-3) data format
 4) Work with GPS
 5) QR code
-6) WOrk wih Media
+6) Work wih Media

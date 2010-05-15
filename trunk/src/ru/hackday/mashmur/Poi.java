@@ -66,4 +66,14 @@ public class Poi {
         return new GeoPoint(latitudeE6, longitudeE6);
     }
 
+    @Override
+    public String toString() {
+        return "Poi{" +
+                "latitudeE6=" + latitudeE6 +
+                ", longitudeE6=" + longitudeE6 +
+                ", description='" + description + '\'' +
+                ", name='" + name + '\'' +
+                ", audioUrl='" + audioUrl + '\'' +
+                '}';
+    }
 }
