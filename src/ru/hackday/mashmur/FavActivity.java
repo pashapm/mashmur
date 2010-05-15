@@ -8,4 +8,4 @@ public class FavActivity extends Activity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
     }
-}
+}  

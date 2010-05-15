@@ -30,7 +30,10 @@ public class HomeGridAdapter extends BaseAdapter {
 
         Intent intent;
         
-        intent = new Intent(context, QrCallerActivity.class);
+		intent = new Intent("com.google.zxing.client.android.SCAN");
+        intent.putExtra("SCAN_MODE", "QR_CODE_MODE");
+        
+//        intent = new Intent(context, QrCallerActivity.class);
         items.add(new Item(ItemType.QR, context.getString(R.string.get_qr), R.drawable.get_qr,intent));
 
         intent = new Intent(context, NearestActivity.class);
