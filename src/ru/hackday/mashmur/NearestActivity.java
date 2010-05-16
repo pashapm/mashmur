@@ -19,6 +19,7 @@ public class NearestActivity extends MapActivity {
 //    TrackOverlay trackOverlay;
 
     private List<Poi> points;
+    private static final GeoPoint SPB_CENTER_POINT = new GeoPoint((int) (59.97031 * E6), (int) (30.319533 * E6));
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -27,8 +28,8 @@ public class NearestActivity extends MapActivity {
         linearLayout = (LinearLayout) findViewById(R.id.zoomview);
         mapView = (MapView) findViewById(R.id.mapview);
         mapView.setBuiltInZoomControls(true);
-        mapView.getController().setZoom(14);
-        mapView.getController().animateTo(new GeoPoint((int) (60.05*E6), (int) (30.05*E6)));
+        mapView.getController().setZoom(13);
+        mapView.getController().animateTo(SPB_CENTER_POINT);
 
         mapOverlays = mapView.getOverlays();
         drawable = this.getResources().getDrawable(R.drawable.androidmarker);
