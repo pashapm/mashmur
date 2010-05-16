@@ -2,7 +2,7 @@ package ru.hackday.mashmur;
 
 import java.io.IOException;
 
-import org.apache.commons.digester.plugins.InitializableRule;
+//import org.apache.commons.digester.plugins.InitializableRule;
 
 import android.app.Activity;
 import android.content.Intent;
