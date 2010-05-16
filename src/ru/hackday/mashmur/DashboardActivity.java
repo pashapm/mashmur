@@ -1,5 +1,7 @@
 package ru.hackday.mashmur;
 
+import java.io.IOException;
+
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
