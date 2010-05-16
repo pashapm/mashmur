@@ -14,13 +14,17 @@ import org.apache.http.impl.client.DefaultHttpClient;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.hardware.SensorListener;
 import android.hardware.SensorManager;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 import ru.hackday.mashmur.media.MediaPlayerDemo;
 import ru.hackday.mashmur.media.MediaPlayerDemo_Audio;
@@ -69,6 +73,33 @@ public class PoiShowActivity extends Activity implements OnClickListener{
         }
         );
         compassView = (CompassView) findViewById(R.id.compass);
+        
+        final ImageView imgview = (ImageView) findViewById(R.id.show_image);
+        
+        new AsyncTask<String, Void, Bitmap>() {
+
+			@Override
+			protected void onPostExecute(Bitmap result) {
+				if (result!=null) {
+					imgview.setImageBitmap(result);	
+				}
+				
+			}
+
+			@Override
+			protected Bitmap doInBackground(String... params) {
+				Bitmap bm = null;
+				try {
+					byte[] img = getFileFromUrl(params[0]);
+					bm = BitmapFactory.decodeByteArray(img, 0, img.length);
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				return bm;
+			} 
+        	
+        }.execute(mPoi.getImageUrl());
     }
 
     @Override
