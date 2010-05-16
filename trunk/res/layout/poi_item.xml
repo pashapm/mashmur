@@ -9,7 +9,7 @@
               android:id="@+id/desc"/>
     <Button android:id="@+id/play" android:layout_width="wrap_content" android:layout_height="wrap_content"
             android:text="Play audio" android:paddingTop="10dip"/>
-    <ru.hackday.mashmur.CompassView android:id="@+id/compass" android:layout_width="120dip"
-                                    android:layout_height="140dip"/>
+    <ru.hackday.mashmur.CompassView android:id="@+id/compass" android:layout_width="80dip"
+                                    android:layout_height="70dip"/>
 
 </LinearLayout>

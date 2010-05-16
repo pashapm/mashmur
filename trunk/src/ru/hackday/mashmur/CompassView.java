@@ -22,10 +22,10 @@ public class CompassView extends View {
     }
 
     public void init() {
-        mPath.moveTo(0, -50);
-        mPath.lineTo(-20, 60);
-        mPath.lineTo(0, 50);
-        mPath.lineTo(20, 60);
+        mPath.moveTo(0, -20);
+        mPath.lineTo(-10, 40);
+        mPath.lineTo(0, 20);
+        mPath.lineTo(10,40);
         mPath.close();
     }
 
@@ -46,7 +46,7 @@ public class CompassView extends View {
 
 //        int w = canvas.getWidth();
 //        int h = canvas.getHeight();
-        canvas.translate(100, 100);
+        canvas.translate(40, 40);
         if (mValues != null) {
             canvas.rotate(-mValues[0]);
         }
