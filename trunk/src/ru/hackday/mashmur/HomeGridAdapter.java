@@ -45,8 +45,8 @@ public class HomeGridAdapter extends BaseAdapter {
         intent = new Intent(context, FavActivity.class);
         items.add(new Item(ItemType.FAV, context.getString(R.string.fav), R.drawable.fav, intent));
 
-        intent = new Intent(context, SearchActivity.class);
-        items.add(new Item(ItemType.FAV, context.getString(R.string.search), R.drawable.search, intent));
+//        intent = new Intent(context, SearchActivity.class);
+//        items.add(new Item(ItemType.FAV, context.getString(R.string.search), R.drawable.search, intent));
 
         intent = new Intent(context, PoiListActivity.class);
         items.add(new Item(ItemType.LIST, context.getString(R.string.list), R.drawable.search, intent));
