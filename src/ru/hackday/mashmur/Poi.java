@@ -1,9 +1,12 @@
 package ru.hackday.mashmur;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import com.google.android.maps.GeoPoint;
 import com.google.android.maps.OverlayItem;
 
-public class Poi {
+public class Poi implements Parcelable {
     public static final int E6 = 1000000;
 
     int latitudeE6;
@@ -80,5 +83,37 @@ public class Poi {
                 ", name='" + name + '\'' +
                 ", audioUrl='" + audioUrl + '\'' +
                 '}';
+    }
+    
+    //parcelable 
+    public int describeContents() {
+        return 0;
+    }
+
+    public void writeToParcel(Parcel out, int flags) {
+        out.writeInt(latitudeE6);
+        out.writeInt(longitudeE6);
+        out.writeString(description);
+        out.writeString(name);
+        out.writeString(audioUrl);
+    }
+
+    public static final Parcelable.Creator<Poi> CREATOR
+            = new Parcelable.Creator<Poi>() {
+        public Poi createFromParcel(Parcel in) {
+            return new Poi(in);
+        }
+
+        public Poi[] newArray(int size) {
+            return new Poi[size];
+        }
+    };
+    
+    private Poi(Parcel in) {
+        latitudeE6 = in.readInt();
+        longitudeE6 = in.readInt();
+        description = in.readString();
+        name = in.readString();
+        audioUrl = in.readString();
     }
 }
