@@ -16,7 +16,7 @@ public class NearestActivity extends MapActivity {
     List<Overlay> mapOverlays;
     Drawable drawable;
     NearestOverlay itemsOverlay;
-    TrackOverlay trackOverlay;
+//    TrackOverlay trackOverlay;
 
     private List<Poi> points;
 
@@ -27,21 +27,23 @@ public class NearestActivity extends MapActivity {
         linearLayout = (LinearLayout) findViewById(R.id.zoomview);
         mapView = (MapView) findViewById(R.id.mapview);
         mapView.setBuiltInZoomControls(true);
+        mapView.getController().setZoom(14);
+        mapView.getController().animateTo(new GeoPoint((int) (60.05*E6), (int) (30.05*E6)));
 
         mapOverlays = mapView.getOverlays();
         drawable = this.getResources().getDrawable(R.drawable.androidmarker);
 
         itemsOverlay = new NearestOverlay(drawable, this);
-        trackOverlay = new TrackOverlay();
+//        trackOverlay = new TrackOverlay();
 
         PoiProvider poiProvider = new PoiProvider();
         List<Poi> points = poiProvider.getNearest(65 * E6, 35 * E6, 10);
         for (Poi point : points) {
             itemsOverlay.addPoi(point);
-            trackOverlay.addGeoPoint(point.makeGeoPoint());
+//            trackOverlay.addGeoPoint(point.makeGeoPoint());
         }
 
-        mapOverlays.add(trackOverlay);
+//        mapOverlays.add(trackOverlay);
         mapOverlays.add(itemsOverlay);
 
     }
