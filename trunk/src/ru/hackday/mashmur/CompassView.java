@@ -14,14 +14,18 @@ public class CompassView extends View {
     private boolean mAnimate;
     private long mNextTime;
     public static float[] mValues;
+    private int shiftAngle = 0;
 
     public CompassView(Context context) {
         super(context);
         // Construct a wedge-shaped path
-        init();
     }
 
-    public void init() {
+    public void setShiftAngle(int shiftAngle) {
+        this.shiftAngle = shiftAngle;
+    }
+
+    public void init() {        
         mPath.moveTo(0, -20);
         mPath.lineTo(-10, 40);
         mPath.lineTo(0, 20);
@@ -48,7 +52,7 @@ public class CompassView extends View {
 //        int h = canvas.getHeight();
         canvas.translate(40, 40);
         if (mValues != null) {
-            canvas.rotate(-mValues[0]);
+            canvas.rotate(-mValues[0] + shiftAngle);
         }
         canvas.drawPath(mPath, mPaint);
     }
