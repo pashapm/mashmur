@@ -2,7 +2,6 @@ package ru.hackday.mashmur;
 
 import android.app.Activity;
 import android.os.Bundle;
-import android.util.Log;
 import android.widget.TextView;
 
 public class PoiShowActivity extends Activity {
