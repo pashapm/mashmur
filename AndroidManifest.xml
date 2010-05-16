@@ -7,27 +7,19 @@
 
     <application android:icon="@drawable/icon" android:label="mashmur" android:debuggable="true">
         <uses-library android:name="com.google.android.maps"/>
-        <activity android:name=".DashboardActivity">
+        <activity android:name=".DashboardActivity" android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
 
-        <activity android:name=".QrCallerActivity">
-        </activity>
-        <activity android:name=".NearestActivity">
-        </activity>
-        <activity android:name=".FavActivity">
-        </activity>
-        <activity android:name=".SearchActivity">
-        </activity>
-        <activity android:name=".PoiListActivity"/>
-        <activity android:name=".media.MediaPlayerDemo_Audio">
-        </activity>
-        <activity android:name=".media.MediaPlayerDemo">
-        </activity>
-        <activity android:name=".PoiShowActivity"/>
+        <activity android:name=".QrCallerActivity" android:screenOrientation="portrait"/>
+        <activity android:name=".NearestActivity" android:screenOrientation="portrait"/>
+        <activity android:name=".FavActivity" android:screenOrientation="portrait"/>
+        <activity android:name=".SearchActivity" android:screenOrientation="portrait"/>
+        <activity android:name=".PoiListActivity" android:screenOrientation="portrait"/>
+        <activity android:name=".PoiShowActivity" android:screenOrientation="portrait"/>
     </application>
 
     <uses-sdk android:minSdkVersion="3" android:targetSdkVersion="4"/>
