@@ -6,4 +6,5 @@
     <string name="nearest">Ближайшее</string>
     <string name="fav">Избранное</string>
     <string name="search">Поиск</string>
+    <string name="list">Список</string>
 </resources>
