@@ -14,14 +14,14 @@ import java.util.LinkedList;
 import java.util.List;
 
 public class PoiProvider {
-    public List<Poi> points = new LinkedList<Poi>();
+//    public List<Poi> points = new LinkedList<Poi>();
 
     private KMLParser parser;
     public PoiProvider() {
-        points.add(new Poi(60 * Poi.E6, 30 * Poi.E6, "description1description1description1description1description1description1description1description1description1description1description1description1description1description1description1description1", "name1", "http://ya.ru/audio1"));
-        points.add(new Poi(61 * Poi.E6, 35 * Poi.E6, "description2", "name3", "http://ya.ru/audio2"));
-        points.add(new Poi(62 * Poi.E6, 25 * Poi.E6, "description3description3description3description3description3description3description3", "name3", "http://ya.ru/audio3"));
-        points.add(new Poi(64 * Poi.E6, 50 * Poi.E6, "description4description4description4description4description4description4description4description4description4description4description4description4description4description4description4description4description4description4description4description4description4description4description4description4description4description4description4description4description4description4description4description4description4description4description4description4description4description4description4description4description4description4description4description4", "name4", "http://ya.ru/audio4"));
+//        points.add(new Poi(60 * Poi.E6, 30 * Poi.E6, "description1description1description1description1description1description1description1description1description1description1description1description1description1description1description1description1", "name1", "http://ya.ru/audio1"));
+//        points.add(new Poi(61 * Poi.E6, 35 * Poi.E6, "description2", "name3", "http://ya.ru/audio2"));
+//        points.add(new Poi(62 * Poi.E6, 25 * Poi.E6, "description3description3description3description3description3description3description3", "name3", "http://ya.ru/audio3"));
+//        points.add(new Poi(64 * Poi.E6, 50 * Poi.E6, "description4description4description4description4description4description4description4description4description4description4description4description4description4description4description4description4description4description4description4description4description4description4description4description4description4description4description4description4description4description4description4description4description4description4description4description4description4description4description4description4description4description4description4description4", "name4", "http://ya.ru/audio4"));
     }
  
     public void init(String url) throws IOException {
@@ -34,12 +34,11 @@ public class PoiProvider {
     }
 
     public List<Poi> getNearest(int lat, int lon, int limit) {
-//        LinkedList<Poi> result = parser.mPois;
-//        Collections.sort(result, new PoiComparator(lat, lon));
-//        if (result.size() > limit) {
-//            result.subList(limit - 1, result.size() - 1).clear();
-//        }
-//        return result;
-        return points;
+        LinkedList<Poi> result = parser.mPois;
+        Collections.sort(result, new PoiComparator(lat, lon));
+        if (result.size() > limit) {
+            result.subList(limit - 1, result.size() - 1).clear();
+        }
+        return result;  
     }
 }
