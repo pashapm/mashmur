@@ -12,15 +12,8 @@ public class MyLocationHelper {
     public static void setLocationListener(final ILocationChangedListener listener, Context context) {
         String locationContext = Context.LOCATION_SERVICE;
         LocationManager locationManager = (LocationManager) context.getSystemService(locationContext);
-        //set criteria
-        Criteria criteria = new Criteria();
-        criteria.setAccuracy(Criteria.ACCURACY_FINE);
-        criteria.setAltitudeRequired(false);
-        criteria.setBearingRequired(false);
-        criteria.setCostAllowed(true);
-        criteria.setPowerRequirement(Criteria.POWER_MEDIUM);
         //location provider
-        String provider = locationManager.getBestProvider(criteria, true);
+        String provider = getBestProvider(locationManager);
         Location location = locationManager.getLastKnownLocation(provider);
         listener.updateWithNewLocation(location);
         final LocationListener locationListener = new LocationListener() {
@@ -40,6 +33,17 @@ public class MyLocationHelper {
             }
         };
         locationManager.requestLocationUpdates(provider, 2000, 10, locationListener);
+    }
+
+    public static String getBestProvider(LocationManager locationManager) {
+        //set criteria
+        Criteria criteria = new Criteria();
+        criteria.setAccuracy(Criteria.ACCURACY_FINE);
+        criteria.setAltitudeRequired(false);
+        criteria.setBearingRequired(false);
+        criteria.setCostAllowed(true);
+        criteria.setPowerRequirement(Criteria.POWER_MEDIUM);
+        return locationManager.getBestProvider(criteria, true);
     }
 
 }
