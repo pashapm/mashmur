@@ -23,14 +23,14 @@ public class PoiProvider {
 //        points.add(new Poi(62 * Poi.E6, 25 * Poi.E6, "description3description3description3description3description3description3description3", "name3", "http://ya.ru/audio3"));
 //        points.add(new Poi(64 * Poi.E6, 50 * Poi.E6, "description4description4description4description4description4description4description4description4description4description4description4description4description4description4description4description4description4description4description4description4description4description4description4description4description4description4description4description4description4description4description4description4description4description4description4description4description4description4description4description4description4description4description4description4", "name4", "http://ya.ru/audio4"));
     }
-
+ 
     public void init() throws IOException {
         HttpClient httpclient = new DefaultHttpClient();
         HttpGet httpGet = new HttpGet("http://citymurmur.ru/kml/");
         HttpResponse response = httpclient.execute(httpGet);
         InputStream is = response.getEntity().getContent();
         parser = new KMLParser(is);
-        parser.parse();
+        parser.parse();  
     }
 
     public List<Poi> getNearest(int lat, int lon, int limit) {
@@ -39,6 +39,6 @@ public class PoiProvider {
         if (result.size() > limit) {
             result.subList(limit - 1, result.size() - 1).clear();
         }
-        return result;
+        return result;  
     }
 }
