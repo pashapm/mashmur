@@ -2,6 +2,8 @@ package ru.hackday.mashmur;
 
 import java.io.IOException;
 
+import org.apache.commons.digester.plugins.InitializableRule;
+
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
@@ -26,6 +28,8 @@ public class DashboardActivity extends Activity implements OnItemClickListener {
         adapter = new HomeGridAdapter(this);
         mHomeGrid.setAdapter(adapter);
         mHomeGrid.setOnItemClickListener(this);
+        
+
     }
 
     @Override
@@ -45,10 +49,22 @@ public class DashboardActivity extends Activity implements OnItemClickListener {
                 String format = intent.getStringExtra("SCAN_RESULT_FORMAT");
                 // Handle successful scan
                 Log.d("########", contents);
-
-                Intent i = new Intent(this, QrCallerActivity.class);
-                i.putExtra(QrCallerActivity.QR_CONTENT, contents);
+ 
+                PoiProvider pr = new PoiProvider();
+                try {
+        			pr.init(contents);
+        		} catch (IOException e) {
+        			// TODO Auto-generated catch block
+        			e.printStackTrace();
+        		}
+                Intent i  = new Intent(this, PoiShowActivity.class);
+                Poi p = pr.getNearest(1, 1, 1).get(0);
+                i.putExtra("poi", p);
                 startActivity(i);
+                
+//                Intent i = new Intent(this, QrCallerActivity.class);
+//                i.putExtra(QrCallerActivity.QR_CONTENT, contents);
+//                startActivity(i);
 
             } else if (resultCode == RESULT_CANCELED) {
                 // Handle cancel

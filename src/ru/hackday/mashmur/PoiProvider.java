@@ -24,9 +24,9 @@ public class PoiProvider {
 //        points.add(new Poi(64 * Poi.E6, 50 * Poi.E6, "description4description4description4description4description4description4description4description4description4description4description4description4description4description4description4description4description4description4description4description4description4description4description4description4description4description4description4description4description4description4description4description4description4description4description4description4description4description4description4description4description4description4description4description4", "name4", "http://ya.ru/audio4"));
     }
  
-    public void init() throws IOException {
+    public void init(String url) throws IOException {
         HttpClient httpclient = new DefaultHttpClient();
-        HttpGet httpGet = new HttpGet("http://citymurmur.ru/kml/");
+        HttpGet httpGet = new HttpGet(url);
         HttpResponse response = httpclient.execute(httpGet);
         InputStream is = response.getEntity().getContent();
         parser = new KMLParser(is);
