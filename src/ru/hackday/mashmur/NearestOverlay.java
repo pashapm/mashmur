@@ -3,6 +3,7 @@ package ru.hackday.mashmur;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.widget.Toast;
 import com.google.android.maps.ItemizedOverlay;
@@ -36,15 +37,17 @@ public class NearestOverlay extends ItemizedOverlay {
     }
 
     @Override
-    protected boolean onTap(int index) {
-        Poi poi = mOverlays.get(index);
+    protected boolean onTap(final int index) {
+        final Poi poi = mOverlays.get(index);
         AlertDialog.Builder dialog = new AlertDialog.Builder(context);
         dialog.setTitle(poi.getName());
         dialog.setMessage(poi.getDescription());
         dialog.setPositiveButton("listen!", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
-                Toast.makeText(context, "todo:", Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(context, PoiShowActivity.class);
+                intent.putExtra("poi", poi);
+                context.startActivity(intent);
             }
         });
         dialog.setNegativeButton(android.R.string.cancel, null);
