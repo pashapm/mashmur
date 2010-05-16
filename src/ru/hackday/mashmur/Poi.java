@@ -14,6 +14,7 @@ public class Poi implements Parcelable {
     String description;
     String name;
     String audioUrl;
+    String imageUrl;
 
     public Poi() {
     }
@@ -57,13 +58,24 @@ public class Poi implements Parcelable {
     public void setAudioUrl(String audioUrl) {
         this.audioUrl = audioUrl;
     }
+    
+    public String getImageUrl() {
+        return imageUrl;
+    }
 
-    public Poi(int latitudeE6, int longitudeE6, String description, String name, String audioUrl) {
+    public void setImageUrl(String imageUrl) {
+        this.imageUrl = imageUrl;
+    }
+    
+    
+
+    public Poi(int latitudeE6, int longitudeE6, String description, String name, String audioUrl, String imageUrl) {
         this.latitudeE6 = latitudeE6;
         this.longitudeE6 = longitudeE6;
         this.description = description;
         this.name = name;
         this.audioUrl = audioUrl;
+        this.imageUrl = imageUrl;
     }
 
     public GeoPoint makeGeoPoint() {
@@ -96,6 +108,7 @@ public class Poi implements Parcelable {
         out.writeString(description);
         out.writeString(name);
         out.writeString(audioUrl);
+        out.writeString(imageUrl);
     }
 
     public static final Parcelable.Creator<Poi> CREATOR
@@ -115,5 +128,6 @@ public class Poi implements Parcelable {
         description = in.readString();
         name = in.readString();
         audioUrl = in.readString();
+        imageUrl = in.readString();
     }
 }

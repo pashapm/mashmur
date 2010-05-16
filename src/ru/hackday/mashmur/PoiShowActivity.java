@@ -1,20 +1,32 @@
 package ru.hackday.mashmur;
 
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InterruptedIOException;
+
+import org.apache.http.HttpEntity;
+import org.apache.http.HttpResponse;
+import org.apache.http.client.HttpClient;
+import org.apache.http.client.methods.HttpGet;
+import org.apache.http.impl.client.DefaultHttpClient;
+
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.hardware.SensorListener;
 import android.hardware.SensorManager;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.TextView;
 import ru.hackday.mashmur.media.MediaPlayerDemo;
 import ru.hackday.mashmur.media.MediaPlayerDemo_Audio;
 
-import java.awt.image.SampleModel;
 
-public class PoiShowActivity extends Activity {
+public class PoiShowActivity extends Activity implements OnClickListener{
     CompassView compassView;
     private SensorManager mSensorManager;
     Poi mPoi;
@@ -37,13 +49,13 @@ public class PoiShowActivity extends Activity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         mSensorManager = (SensorManager) getSystemService(Context.SENSOR_SERVICE);
-        setContentView(R.layout.poi_item);
+        setContentView(R.layout.poi_show_view);
         mPoi = getIntent().getExtras().getParcelable("poi");
-        TextView name = (TextView) findViewById(R.id.name);
+        TextView name = (TextView) findViewById(R.id.show_name);
         name.setText(mPoi.getName());
-        TextView desc = (TextView) findViewById(R.id.desc);
+        TextView desc = (TextView) findViewById(R.id.show_desc);
         desc.setText(mPoi.getDescription());
-        Button playButton = (Button) findViewById(R.id.play);
+        Button playButton = (Button) findViewById(R.id.show_play);
         playButton.setVisibility(View.VISIBLE);
         playButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
@@ -73,4 +85,52 @@ public class PoiShowActivity extends Activity {
         super.onStop();
     }
 
+	@Override
+	public void onClick(View v) {
+		final String url = mPoi.getAudioUrl();
+//		final String url = "http://www.wyntonmarsalis.org/audio/tribute/wyntonstribute.mp3";
+		 
+		new Thread() {
+
+			@Override
+			public void run() {
+				try {
+					byte[] audiofile = getFileFromUrl(url);
+					FileOutputStream out = new FileOutputStream(new File("/sdcard/test.mp3"));
+					out.write(audiofile);
+					out.close();
+					Log.d("PoiShowActivity", "Downloaded!11");
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				} 
+			}
+			
+		}.start();
+
+		
+	}
+	
+	public byte[] getFileFromUrl(String url) throws IOException {
+		HttpClient httpClient = new DefaultHttpClient();
+        if (url == null) return new byte[]{};
+        HttpGet httpGet = new HttpGet(url);
+        HttpResponse response = httpClient.execute(httpGet);
+        HttpEntity httpEntity = response.getEntity();
+        byte[] result = null;
+        if (httpEntity != null) {
+            try {
+                result = HttpClientHelper.httpEntityToByteArray(httpEntity);
+            }
+            catch (InterruptedIOException e) {
+                httpGet.abort();
+                throw e;
+            }
+            finally {
+                httpEntity.consumeContent();
+            }
+        }
+        return result;
+    }
+ 
 }
