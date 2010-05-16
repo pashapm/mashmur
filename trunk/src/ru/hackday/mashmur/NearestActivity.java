@@ -37,7 +37,7 @@ public class NearestActivity extends MapActivity {
         itemsOverlay = new NearestOverlay(drawable, this);
 //        trackOverlay = new TrackOverlay();
 
-        PoiProvider poiProvider = new PoiProvider();
+        PoiProvider poiProvider = new PoiProvider(this);
         List<Poi> points = poiProvider.getNearest(65 * E6, 35 * E6, 10);
         for (Poi point : points) {
             itemsOverlay.addPoi(point);

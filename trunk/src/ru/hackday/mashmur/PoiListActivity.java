@@ -32,6 +32,7 @@ public class PoiListActivity extends Activity implements ILocationChangedListene
     private PoiListAdapter adapter;
     private SensorManager mSensorManager;
 
+    //todo: init/update from GPS
     private GeoPoint currentPoint = new GeoPoint((int) (59.943894 * E6), (int) (30.295497 * E6));
 
 
@@ -42,7 +43,7 @@ public class PoiListActivity extends Activity implements ILocationChangedListene
         setContentView(R.layout.poi_list);
         mSensorManager = (SensorManager) getSystemService(Context.SENSOR_SERVICE);
 //        MyLocationHelper.setLocationListener(this, this);
-        poiProvider = new PoiProvider();
+        poiProvider = new PoiProvider(this);
 //        updateWithNewLocation(null);
         poiList = poiProvider.getNearest(67 * E6, 60 * E6, 100);
         ListView listView = (ListView) findViewById(R.id.poi_list);
@@ -104,9 +105,7 @@ public class PoiListActivity extends Activity implements ILocationChangedListene
             double b = currentPoint.getLongitudeE6() - poi.getLongitudeE6();
             double h = Math.sqrt(a * a + b * b);
             if (h != 0) {
-//                System.out.println("Math.acos(a / h) = " + Math.acos(a / h));
                 angle = (int) (Math.acos(a / h) / Math.PI * 360);
-                System.out.println("angle = " + angle);
             }
             compassView.setShiftAngle(angle);
             return itemView;

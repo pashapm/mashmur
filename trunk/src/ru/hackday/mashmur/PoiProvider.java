@@ -1,5 +1,6 @@
 package ru.hackday.mashmur;
 
+import android.content.Context;
 import org.apache.http.HttpResponse;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpGet;
@@ -14,19 +15,20 @@ import java.util.List;
 public class PoiProvider {
     public List<Poi> points = new LinkedList<Poi>();
 
-    public PoiProvider() {
-        try {
-            init("http://citymurmur.ru/kml/");
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+    public PoiProvider(Context context) {
+//        try {
+//            init("http://citymurmur.ru/kml/");
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }
     } 
   
-    public void init(String url) throws IOException {
-        HttpClient httpclient = new DefaultHttpClient();
-        HttpGet httpGet = new HttpGet(url);
-        HttpResponse response = httpclient.execute(httpGet);
-        InputStream is = response.getEntity().getContent();
+    public void init(Context context, String url) throws IOException {
+//        HttpClient httpclient = new DefaultHttpClient();
+//        HttpGet httpGet = new HttpGet(url);
+//        HttpResponse response = httpclient.execute(httpGet);
+//        InputStream is = response.getEntity().getContent();
+        InputStream is = context.getAssets().open("pois.kml");
         KMLParser parser = new KMLParser(is);
         parser.parse();
         points = parser.mPois;
