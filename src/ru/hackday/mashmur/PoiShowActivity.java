@@ -66,7 +66,7 @@ public class PoiShowActivity extends Activity implements OnClickListener {
         mSensorManager = (SensorManager) getSystemService(Context.SENSOR_SERVICE);
         setContentView(R.layout.poi_show_view);
         final View audioLayout = findViewById(R.id.player);
-        audioLayout.setVisibility(View.INVISIBLE);
+        audioLayout.setVisibility(View.GONE);
         mPoi = getIntent().getExtras().getParcelable("poi");
         TextView name = (TextView) findViewById(R.id.show_name);
         name.setText(mPoi.getName());
