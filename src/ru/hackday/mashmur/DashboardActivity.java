@@ -28,7 +28,7 @@ public class DashboardActivity extends Activity implements OnItemClickListener {
         adapter = new HomeGridAdapter(this);
         mHomeGrid.setAdapter(adapter);
         mHomeGrid.setOnItemClickListener(this);
-        
+
 
     }
 
@@ -50,13 +50,13 @@ public class DashboardActivity extends Activity implements OnItemClickListener {
                 // Handle successful scan
                 Log.d("########", contents);
  
-                PoiProvider pr = new PoiProvider();
-                try {
-        			pr.init(contents);
-        		} catch (IOException e) {
-        			// TODO Auto-generated catch block
-        			e.printStackTrace();
-        		}
+                PoiProvider pr = new PoiProvider(this);
+//                try {
+//        			pr.init(contents);
+//        		} catch (IOException e) {
+//        			// TODO Auto-generated catch block
+//        			e.printStackTrace();
+//        		}
                 Intent i  = new Intent(this, PoiShowActivity.class);
                 Poi p = pr.getNearest(1, 1, 1).get(0);
                 i.putExtra("poi", p);
