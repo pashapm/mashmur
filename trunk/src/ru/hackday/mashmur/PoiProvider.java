@@ -20,8 +20,8 @@ public class PoiProvider {
         } catch (IOException e) {
             e.printStackTrace();
         }
-    }
-
+    } 
+  
     public void init(String url) throws IOException {
         HttpClient httpclient = new DefaultHttpClient();
         HttpGet httpGet = new HttpGet(url);

@@ -31,6 +31,7 @@ public class KMLParser extends DefaultHandler {
 	private Poi p;
 	private String thisElement = "";
 	private InputStream mIs;
+	private String what;
 	
 	KMLParser(InputStream is) {
 		mIs = is;
@@ -54,7 +55,13 @@ public class KMLParser extends DefaultHandler {
 		if (localName.equals("Placemark")) {
 			p = new Poi(); 
 			mPois.add(p);
+			
 		} 
+		if (attributes.getValue("name") != null && attributes.getValue("name").equals("audioUrl")) {
+			what = "audioUrl";
+		} else if (attributes.getValue("name") != null && attributes.getValue("name").equals("pictureUrl")) {
+			what = "pictureUrl";
+		}
 	} 
 
 	@Override
@@ -73,7 +80,13 @@ public class KMLParser extends DefaultHandler {
 				p.setLatitudeE6((int) (lat * Poi.E6));
 				p.setLongitudeE6((int) (lon * Poi.E6));
 			} else if (thisElement.equals("value")) {
-				p.setAudioUrl(s);
+				if (what.equals("audioUrl")) {
+					p.setAudioUrl(s); 
+					Log.d("####A Got value: ", s);
+				} else if (what.equals("pictureUrl")) {
+					p.setImageUrl(s);
+				    Log.d("####I Got value: ", s);
+				}
 			}
 		    Log.d("#### Got value: ", s);
 		}
@@ -82,4 +95,6 @@ public class KMLParser extends DefaultHandler {
 	
 
 }
+
+
 

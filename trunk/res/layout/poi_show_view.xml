@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="fill_parent"
+              android:orientation="vertical" android:background="#ffffff" android:layout_height="fill_parent">
+    <TextView android:layout_width="fill_parent" android:layout_height="wrap_content"
+              android:textStyle="bold" android:textSize="20sp" android:text="sdsd" android:id="@+id/show_name" android:minHeight="40dip" android:gravity="center" android:background="#a1f3b2" android:textColor="#000000"/>
+
+    <TextView android:text="@+id/TextView01" android:layout_width="wrap_content" android:layout_height="wrap_content" android:id="@+id/show_desc"/>
+    <Button android:layout_width="wrap_content" android:layout_height="wrap_content"
+            android:text="Play audio" android:id="@+id/show_play"/>
+    
+
+
+<ImageView android:layout_width="wrap_content" android:layout_height="wrap_content" android:id="@+id/show_image"></ImageView>
+</LinearLayout>
