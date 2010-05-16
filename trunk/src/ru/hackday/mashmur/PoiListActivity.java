@@ -17,17 +17,23 @@ import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
+import com.google.android.maps.GeoPoint;
 import ru.hackday.mashmur.media.MediaPlayerDemo;
 import ru.hackday.mashmur.media.MediaPlayerDemo_Audio;
 
 import java.io.File;
 import java.util.List;
 
+import static ru.hackday.mashmur.Poi.E6;
+
 public class PoiListActivity extends Activity implements ILocationChangedListener {
     private PoiProvider poiProvider;
     private List<Poi> poiList;
     private PoiListAdapter adapter;
     private SensorManager mSensorManager;
+
+    private GeoPoint currentPoint = new GeoPoint((int) (59.943894 * E6), (int) (30.295497 * E6));
+
 
     //TODO make listActivity?
     @Override
@@ -38,20 +44,25 @@ public class PoiListActivity extends Activity implements ILocationChangedListene
 //        MyLocationHelper.setLocationListener(this, this);
         poiProvider = new PoiProvider();
 //        updateWithNewLocation(null);
-        poiList = poiProvider.getNearest(67 * Poi.E6, 60 * Poi.E6, 100);
+        poiList = poiProvider.getNearest(67 * E6, 60 * E6, 100);
         ListView listView = (ListView) findViewById(R.id.poi_list);
-        adapter = new PoiListAdapter();
+        adapter = new PoiListAdapter(currentPoint);
         listView.setAdapter(adapter);
 
     }
 
     public void updateWithNewLocation(Location location) {
         if (poiProvider == null) return;
-        poiList = poiProvider.getNearest(67 * Poi.E6, 60 * Poi.E6, 100);
+        poiList = poiProvider.getNearest(67 * E6, 60 * E6, 100);
     }
 
 
     private class PoiListAdapter extends BaseAdapter {
+        private GeoPoint currentPoint;
+
+        public PoiListAdapter(GeoPoint currentPoint) {
+            this.currentPoint = currentPoint;
+        }
 
 
         public int getCount() {
@@ -87,7 +98,17 @@ public class PoiListActivity extends Activity implements ILocationChangedListene
                     startActivity(intent);
                 }
             });
-            CompassView compassView = (CompassView) findViewById(R.id.compass);
+            CompassView compassView = (CompassView) itemView.findViewById(R.id.compass);
+            int angle = 0;
+            double a = currentPoint.getLatitudeE6() - poi.getLatitudeE6();
+            double b = currentPoint.getLongitudeE6() - poi.getLongitudeE6();
+            double h = Math.sqrt(a * a + b * b);
+            if (h != 0) {
+//                System.out.println("Math.acos(a / h) = " + Math.acos(a / h));
+                angle = (int) (Math.acos(a / h) / Math.PI * 360);
+                System.out.println("angle = " + angle);
+            }
+            compassView.setShiftAngle(angle);
             return itemView;
         }
     }
