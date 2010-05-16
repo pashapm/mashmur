@@ -9,12 +9,15 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+
 import java.util.ArrayList;
 import java.util.List;
 
 public class HomeGridAdapter extends BaseAdapter {
 
-    public enum ItemType {QR, NEAR, FAV, SEARCH}
+    public enum ItemType {
+        QR, NEAR, FAV, SEARCH, LIST;
+    }
 
     private List<Item> items;
 
@@ -29,21 +32,24 @@ public class HomeGridAdapter extends BaseAdapter {
         items = new ArrayList<Item>();
 
         Intent intent;
-        
-		intent = new Intent("com.google.zxing.client.android.SCAN");
+
+        intent = new Intent("com.google.zxing.client.android.SCAN");
         intent.putExtra("SCAN_MODE", "QR_CODE_MODE");
-        
+
 //        intent = new Intent(context, QrCallerActivity.class);
-        items.add(new Item(ItemType.QR, context.getString(R.string.get_qr), R.drawable.get_qr,intent));
+        items.add(new Item(ItemType.QR, context.getString(R.string.get_qr), R.drawable.get_qr, intent));
 
         intent = new Intent(context, NearestActivity.class);
-        items.add(new Item(ItemType.NEAR, context.getString(R.string.nearest), R.drawable.nearest,intent));
+        items.add(new Item(ItemType.NEAR, context.getString(R.string.nearest), R.drawable.nearest, intent));
 
         intent = new Intent(context, FavActivity.class);
         items.add(new Item(ItemType.FAV, context.getString(R.string.fav), R.drawable.fav, intent));
 
         intent = new Intent(context, SearchActivity.class);
         items.add(new Item(ItemType.FAV, context.getString(R.string.search), R.drawable.search, intent));
+
+        intent = new Intent(context, PoiListActivity.class);
+        items.add(new Item(ItemType.LIST, context.getString(R.string.list), R.drawable.search, intent));
 
         this.context = context;
     }
@@ -60,7 +66,7 @@ public class HomeGridAdapter extends BaseAdapter {
         else
             return null;
     }
-    
+
     @Override
     public long getItemId(int position) {
         if (position < items.size())
