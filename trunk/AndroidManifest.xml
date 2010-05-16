@@ -23,6 +23,10 @@
         <activity android:name=".SearchActivity">
         </activity>
         <activity android:name=".PoiListActivity"/>
+        <activity android:name=".media.MediaPlayerDemo_Audio">
+        </activity>
+        <activity android:name=".media.MediaPlayerDemo">
+        </activity>
     </application>
 
     <uses-sdk android:minSdkVersion="3" android:targetSdkVersion="4"/>
