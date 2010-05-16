@@ -16,11 +16,11 @@ public class PoiProvider {
     public List<Poi> points = new LinkedList<Poi>();
 
     public PoiProvider(Context context) {
-//        try {
-//            init("http://citymurmur.ru/kml/");
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//        }
+        try {
+            init(context, "http://citymurmur.ru/kml/");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     } 
   
     public void init(Context context, String url) throws IOException {
@@ -28,7 +28,7 @@ public class PoiProvider {
 //        HttpGet httpGet = new HttpGet(url);
 //        HttpResponse response = httpclient.execute(httpGet);
 //        InputStream is = response.getEntity().getContent();
-        InputStream is = context.getAssets().open("pois.kml");
+        InputStream is = context.getAssets().open("pois.xml");
         KMLParser parser = new KMLParser(is);
         parser.parse();
         points = parser.mPois;
